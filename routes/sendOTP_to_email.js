@@ -124,11 +124,13 @@ router.post('/email/otp', async (req, res, next) => {
         return res.status(400).send(response) 
       }
     }
+    console.log('process.env',process.env)
 
     // Create nodemailer transporter
     const transporter = nodemailer.createTransport({
-      host: 'smtp.zoho.in',
-      port: 465,
+      host: 'smtp.gmail.com',
+      service: 'gmail',
+      port: 587,
       secure: true,
       auth: {
         user: `${process.env.EMAIL_ADDRESS}`,
@@ -138,7 +140,7 @@ router.post('/email/otp', async (req, res, next) => {
 
 
     const mailOptions = {
-      from: `"Divyansh Agarwal"<${process.env.EMAIL_ADDRESS}>`,
+      from: `"Varun Singh"<${process.env.EMAIL_ADDRESS}>`,
       to: `${email}`,
       subject: email_subject,
       text: email_message ,
